@@ -1,0 +1,25 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Ranking{% endblock %}
+
+{% block content %}
+<h2>Ranking</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Posição</th>
+            <th>Jogador</th>
+            <th>Pontuação</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ranking in rankings %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ ranking.player.username }}</td>
+                <td>{{ ranking.score }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

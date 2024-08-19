@@ -1,0 +1,46 @@
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Pedra, Papel, Tesoura{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'app/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><a href="{% url 'index' %}">Pedra, Papel, Tesoura</a></h1>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="{% url 'index' %}"><i class="fas fa-home"></i></a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'game' %}"><i class="fas fa-gamepad"></i></a></li>
+                        <li><a href="{% url 'ranking' %}"><i class="fas fa-trophy"></i></a></li>
+                        <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i></a></li>
+                    {% else %}
+                        <li><a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i></a></li>
+                        <li><a href="{% url 'signup' %}"><i class="fas fa-user-plus"></i></a></li>
+                    {% endif %}
+                </ul>
+                <div class="burger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </header>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <script>
+        const burger = document.querySelector('.burger');
+        const navLinks = document.querySelector('.nav-links');
+
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            burger.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

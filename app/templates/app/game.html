@@ -1,0 +1,46 @@
+{% extends 'app/base.html' %}
+
+{% load static %}
+
+{% block title %}Jogo{% endblock %}
+
+{% block content %}
+<h2>Jogo</h2>
+
+<div>
+    <p>Seu Placar: {{ player_score }}</p>
+    <p>Placar da Máquina: {{ computer_score }}</p>
+</div>
+
+<div class="choices">
+    <div class="choice-section">
+        <h3>Você escolheu</h3>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" name="choice" value="pedra">
+                <img src="{% static 'app/images/pedra.png' %}" alt="Pedra">
+            </button>
+            <button type="submit" name="choice" value="papel">
+                <img src="{% static 'app/images/papel.png' %}" alt="Papel">
+            </button>
+            <button type="submit" name="choice" value="tesoura">
+                <img src="{% static 'app/images/tesoura.png' %}" alt="Tesoura">
+            </button>
+        </form>
+    </div>
+
+    <div class="choice-section">
+        <h3>O computador escolheu</h3>
+        {% if result %}
+        <img src="{% static 'app/images/' %}{{ computer_choice }}.png" alt="{{ computer_choice }}">
+        {% endif %}
+    </div>
+</div>
+
+{% if result %}
+    <div class="result-middle">
+        <span>Resultado:</span>
+        <span>{{ result }}</span>
+    </div>
+{% endif %}
+{% endblock %}

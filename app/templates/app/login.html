@@ -1,0 +1,15 @@
+{% extends 'app/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    <a id="botao" href="{% url 'signup' %}">Cadastrar</a>
+</div>
+{% endblock %}
